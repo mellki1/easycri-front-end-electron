@@ -1,0 +1,18 @@
+/* NavBar */
+
+.logo {
+    width: 150px;
+    height: 60px;
+    margin-right: 50px;
+}
+
+.nav-bar .col{
+    background: #ced8da;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.nav-bar-itens {
+    font-weight: 500;
+    font-size: 22px;
+}

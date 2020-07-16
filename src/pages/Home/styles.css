@@ -1,0 +1,53 @@
+
+
+
+.cards{
+    
+    text-align: center;
+    width: 211px;
+    height: 200px;
+    margin-top: 20%;
+    margin-left:25%;
+    background: #92a8ad73;
+    border-radius: 38.25px 38.25px 0px 0px;
+}
+
+.icones {
+    display: block;
+    margin: 15px auto auto auto;
+    width: 120px;
+    height: 105px;
+    text-align: center;
+}
+
+.texto-card {
+    display: block;
+    margin-top: 15px;
+    font-size: 18.0857px;
+    line-height: 21px;
+    text-align: center;
+}
+
+.buttons a{
+    border: none;
+    margin-top: 25px;
+    background: #CED8DA;
+    color: #000000;
+    border-radius: 0px 0px 38.43px 38.43px;
+    font-weight: 500;
+    font-size: 18px;
+    width: 100%;
+    height: 50px;
+    line-height: 40px;
+    text-decoration: none;
+    transition: filter 0.2s;
+}
+
+.buttons a:hover{
+   filter: brightness(90%);
+}
+
+
+.buttons a:focus{
+   outline: none;
+}
