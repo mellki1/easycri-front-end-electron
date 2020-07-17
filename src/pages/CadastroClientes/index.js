@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { BsFillPersonPlusFill, BsFilePlus, BsPencilSquare, BsHouseFill } from 'react-icons/bs';
 import MaskedInput from 'react-text-mask';
 import { validateBr } from 'js-brasil';
 import api from './../../services/api';
 
 import './styles.css';
-import Header from './../Header';
 
 export default function CadastroCliente() {
     const [form, setForm] = useState();
@@ -113,7 +113,8 @@ export default function CadastroCliente() {
 
 
     }
-
+    
+    /* Opções de acordo com o sexo */
     async function Formulario(sexoCli) {
 
 
@@ -202,250 +203,271 @@ export default function CadastroCliente() {
     return (
 
         <Container fluid >
-            <Row className='nav-bar'>
-                <Col>
-                    <Header />
-                </Col>
-            </Row>
-            <Row className='cadastro-container'>
-                <div className="content">
-                    <Form noValidate validated={validated} onSubmit={handleSubmit}>
-                        <Form.Row>
+            <div class="window">
+                <div class="window-content">
+                    <div class="pane-group">
+                        <div class="pane-sm sidebar">
+                            { /* Menu */}
+                            <nav class="nav-group">
+                                <h4 class="nav-group-title">Menu</h4>
+                                <span class="nav-group-item">
+                                    <BsHouseFill className='icones-menu' />
+                                       Inicio
+                               </span>
+                                <span class="nav-group-item">
+                                    <BsFillPersonPlusFill className='icones-menu' />
+                                       Cadastrar clientes
+                               </span>
+                                <span class="nav-group-item">
+                                    <BsFilePlus className='icones-menu' />
+                                       Cadastrar requerimento
+                               </span>
+                                <span class="nav-group-item">
+                                    <BsPencilSquare className='icones-menu' />
+                                       Gerar ato
+                               </span>
+                            </nav>
+                        </div>
+                        <div class="pane">
+                            { /* Formulario */}
+                            <Row className='cadastro-container'>
+                                <div className="content">
+                                    <Form noValidate validated={validated} onSubmit={handleSubmit}>
+                                        <Form.Row>
+                                            <Col>
+                                                <Form.Group>
+                                                    <Form.Label>Sexo</Form.Label>
+                                                        <div>
+                                                            <label>
+                                                                <input
+                                                                    type="radio"
+                                                                    name='sexo'
+                                                                    value='sexo_feminino'
+                                                                    onChange={
+                                                                        e => {
+                                                                            setSexo(e.target.value);
+                                                                            setEstadoCivil('solteira');
+                                                                            setNacionalidade('brasileira');
+                                                                            Formulario(e.target.value);
+                                                                        }
+                                                                    }
+                                                                />
+                                                                Feminino
+                                                            </label>
 
-                            <Col>
-                                <Form.Group>
-                                    <Form.Label>Sexo</Form.Label>
-                                    <div>
+                                                            <label className='espaco-radio'>
+                                                                <input
+                                                                    type="radio"
+                                                                    name='sexo'
+                                                                    value='sexo_masculino'
+                                                                    onChange={
+                                                                        e => {
+                                                                            setSexo(e.target.value);
+                                                                            setEstadoCivil('solteiro');
+                                                                            setNacionalidade('brasileiro');
+                                                                            Formulario(e.target.value);
+                                                                        }
+                                                                    }
+                                                                />
+                                                                Masculino
+                                                            </label>
+                                                        </div>
+                                                </Form.Group>
+                                            </Col>
 
-                                        <label>
-                                            <input
-                                                type="radio"
-                                                name='sexo'
-                                                value='sexo_feminino'
-                                                onChange={
+                                        </Form.Row>
 
-                                                    e => {
-                                                        setSexo(e.target.value);
-                                                        setEstadoCivil('solteira');
-                                                        setNacionalidade('brasileira');
-                                                        Formulario(e.target.value);
-                                                    }
-                                                }
-                                            />
-                                                Feminino
-                                        </label>
-
-                                        <label className='espaco-radio'>
-                                            <input
-                                                type="radio"
-                                                name='sexo'
-                                                value='sexo_masculino'
-                                                onChange={
-
-                                                    e => {
-                                                        setSexo(e.target.value);
-                                                        setEstadoCivil('solteiro');
-                                                        setNacionalidade('brasileiro');
-                                                        Formulario(e.target.value);
-                                                    }
-                                                }
-                                            />
-                                                Masculino
-                                        </label>
-                                    </div>
-
-                                </Form.Group>
-                            </Col>
-
-                        </Form.Row>
-
-                        <Form.Row>
-                            <Col xs={6} className='space'>
-                                <Form.Group as={Row} controlId='nome'>
-                                    <Form.Label>Nome completo</Form.Label>
-                                    <Form.Control
-                                        required type="text"
-                                        value={nome}
-                                        onChange={e => setNome(e.target.value)}
-                                    />
-                                </Form.Group>
-                            </Col>
-                            <Col className='space'>
-                                {form}
-                            </Col>
-                        </Form.Row>
+                                        <Form.Row>
+                                            <Col xs={6} className='space'>
+                                                <Form.Group as={Row} controlId='nome'>
+                                                    <Form.Label>Nome completo</Form.Label>
+                                                    <Form.Control
+                                                        required type="text"
+                                                        value={nome}
+                                                        onChange={e => setNome(e.target.value)}
+                                                    />
+                                                </Form.Group>
+                                            </Col>
+                                            <Col className='space'>
+                                                {form}
+                                            </Col>
+                                        </Form.Row>
 
 
-                        <Form.Row>
-                            <Col>
-                                <Form.Group controlId="profissao">
-                                    <Form.Label>Profissão</Form.Label>
-                                    <Form.Control
-                                        required
-                                        type="text"
-                                        value={profissao}
-                                        onChange={e => setProfissao(e.target.value)}
-                                    />
-                                </Form.Group>
-                            </Col>
-                            <Col>
-                                <Form.Group controlId="tipo_documento">
-                                    <Form.Label>Tipo de Documento</Form.Label>
-                                    <Form.Control
-                                        required
-                                        as="select"
-                                        value={tipoDocumento}
-                                        onChange={e => setTipoDocumento(e.target.value)}
-                                    >
-                                        <option>identidade</option>
-                                        <option>CNH</option>
-                                        <option>identidade Profissional</option>
-                                    </Form.Control>
-                                </Form.Group>
-                            </Col>
-                            <Col>
-                                <Form.Group
-                                    controlId="documento_identificacao"
-                                    value={documentoIdentificacao}
-                                    onChange={e => setDocumentoIdentificacao(e.target.value)}
-                                >
-                                    <Form.Label>Documento de Identificacao</Form.Label>
-                                    <Form.Control required type="text" />
-                                </Form.Group>
-                            </Col>
-                            <Col>
-                                <Form.Group controlId="cpf">
-                                    <Form.Label>CPF</Form.Label>
-                                    <MaskedInput
-                                        id='cpf'
-                                        className='form-control'
-                                        required
-                                        mask={[/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/,]}
-                                        value={cpf}
-                                        onChange={e => setCpf(e.target.value)}
-                                        onKeyUp={VerificacaoCpf}
-                                    />
+                                        <Form.Row>
+                                            <Col>
+                                                <Form.Group controlId="profissao">
+                                                    <Form.Label>Profissão</Form.Label>
+                                                    <Form.Control
+                                                        required
+                                                        type="text"
+                                                        value={profissao}
+                                                        onChange={e => setProfissao(e.target.value)}
+                                                    />
+                                                </Form.Group>
+                                            </Col>
+                                            <Col>
+                                                <Form.Group controlId="tipo_documento">
+                                                    <Form.Label>Tipo de Documento</Form.Label>
+                                                    <Form.Control
+                                                        required
+                                                        as="select"
+                                                        value={tipoDocumento}
+                                                        onChange={e => setTipoDocumento(e.target.value)}>
+                                                        <option>identidade</option>
+                                                        <option>CNH</option>
+                                                        <option>identidade Profissional</option>
+                                                    </Form.Control>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col>
+                                                <Form.Group
+                                                    controlId="documento_identificacao"
+                                                    value={documentoIdentificacao}
+                                                    onChange={e => setDocumentoIdentificacao(e.target.value)}
+                                                >
+                                                    <Form.Label>Documento de Identificacao</Form.Label>
+                                                    <Form.Control required type="text" />
+                                                </Form.Group>
+                                            </Col>
+                                            <Col>
+                                                <Form.Group controlId="cpf">
+                                                    <Form.Label>CPF</Form.Label>
+                                                    <MaskedInput
+                                                        id='cpf'
+                                                        className='form-control'
+                                                        required
+                                                        mask={[/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/,]}
+                                                        value={cpf}
+                                                        onChange={e => setCpf(e.target.value)}
+                                                        onKeyUp={VerificacaoCpf}
+                                                    />
 
-                                </Form.Group>
-                            </Col>
-                        </Form.Row>
+                                                </Form.Group>
+                                            </Col>
+                                        </Form.Row>
 
-                        <Form.Row>
-                            <Col>
-                                <Form.Group controlId="nome_pai">
-                                    <Form.Label>Nome do pai</Form.Label>
-                                    <Form.Control
-                                        required
-                                        type="text"
-                                        value={nomePai}
-                                        onChange={e => setNomePai(e.target.value)}
-                                    />
-                                </Form.Group>
-                            </Col>
-                            <Col>
-                                <Form.Group controlId="nome_mae">
-                                    <Form.Label>Nome da mãe</Form.Label>
-                                    <Form.Control
-                                        required
-                                        type="text"
-                                        value={nomeMae}
-                                        onChange={e => setNomeMae(e.target.value)}
-                                    />
-                                </Form.Group>
-                            </Col>
-                        </Form.Row>
-                        <Form.Row>
-                            <Col xs={7}>
-                                <Form.Group controlId="logradouro">
-                                    <Form.Label>Logradouro</Form.Label>
-                                    <Form.Control
-                                        required
-                                        type="text"
-                                        value={logradouro}
-                                        onChange={e => setLogradouro(e.target.value)}
-                                    />
-                                </Form.Group>
-                            </Col>
-                            <Col xs={2}>
-                                <Form.Group controlId="numero">
-                                    <Form.Label>Número</Form.Label>
-                                    <Form.Control
-                                        required
-                                        type="text"
-                                        value={numero}
-                                        onChange={e => setNumero(e.target.value)}
-                                    />
-                                </Form.Group>
-                            </Col>
-                            <Col>
-                                <Form.Group controlId="bairro">
-                                    <Form.Label>Bairro</Form.Label>
-                                    <Form.Control
-                                        required
-                                        type="text"
-                                        value={bairro}
-                                        onChange={e => setBairro(e.target.value)}
-                                    />
-                                </Form.Group>
-                            </Col>
-                        </Form.Row>
-                        <Form.Row>
-                            <Col>
-                                <Form.Group controlId="cidade">
-                                    <Form.Label>Cidade</Form.Label>
-                                    <Form.Control
-                                        required
-                                        type="text"
-                                        value={cidade}
-                                        onChange={e => setCidade(e.target.value)}
-                                    />
-                                </Form.Group>
-                            </Col>
-                            <Col xs={1}>
-                                <Form.Group controlId="uf">
-                                    <Form.Label>UF</Form.Label>
-                                    <Form.Control
-                                        className='uf'
-                                        required
-                                        maxLength="2"
-                                        type="text"
-                                        value={uf}
-                                        onChange={e => setUf(e.target.value)}
-                                    />
-                                </Form.Group>
-                            </Col>
-                            <Col>
-                                <Form.Group controlId="email">
-                                    <Form.Label>E-mail</Form.Label>
-                                    <Form.Control
-                                        required
-                                        type="email"
-                                        value={email}
-                                        onChange={e => setEmail(e.target.value)}
-                                    />
-                                </Form.Group>
-                            </Col>
-                            <Col>
-                                <Form.Group controlId="telefone">
-                                    <Form.Label>Telefone</Form.Label>
-                                    <MaskedInput
-                                        id='telefone'
-                                        className='form-control'
-                                        required
-                                        guide={false}
-                                        mask={mascaraTelefone}
-                                        onChange={e => setTelefone(e.target.value)}
-                                    />
-                                </Form.Group>
-                            </Col>
-                        </Form.Row>
+                                        <Form.Row>
+                                            <Col>
+                                                <Form.Group controlId="nome_pai">
+                                                    <Form.Label>Nome do pai</Form.Label>
+                                                    <Form.Control
+                                                        required
+                                                        type="text"
+                                                        value={nomePai}
+                                                        onChange={e => setNomePai(e.target.value)}
+                                                    />
+                                                </Form.Group>
+                                            </Col>
+                                            <Col>
+                                                <Form.Group controlId="nome_mae">
+                                                    <Form.Label>Nome da mãe</Form.Label>
+                                                    <Form.Control
+                                                        required
+                                                        type="text"
+                                                        value={nomeMae}
+                                                        onChange={e => setNomeMae(e.target.value)}
+                                                    />
+                                                </Form.Group>
+                                            </Col>
+                                        </Form.Row>
+                                        <Form.Row>
+                                            <Col xs={7}>
+                                                <Form.Group controlId="logradouro">
+                                                    <Form.Label>Logradouro</Form.Label>
+                                                    <Form.Control
+                                                        required
+                                                        type="text"
+                                                        value={logradouro}
+                                                        onChange={e => setLogradouro(e.target.value)}
+                                                    />
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={2}>
+                                                <Form.Group controlId="numero">
+                                                    <Form.Label>Número</Form.Label>
+                                                    <Form.Control
+                                                        required
+                                                        type="text"
+                                                        value={numero}
+                                                        onChange={e => setNumero(e.target.value)}
+                                                    />
+                                                </Form.Group>
+                                            </Col>
+                                            <Col>
+                                                <Form.Group controlId="bairro">
+                                                    <Form.Label>Bairro</Form.Label>
+                                                    <Form.Control
+                                                        required
+                                                        type="text"
+                                                        value={bairro}
+                                                        onChange={e => setBairro(e.target.value)}
+                                                    />
+                                                </Form.Group>
+                                            </Col>
+                                        </Form.Row>
+                                        <Form.Row>
+                                            <Col>
+                                                <Form.Group controlId="cidade">
+                                                    <Form.Label>Cidade</Form.Label>
+                                                    <Form.Control
+                                                        required
+                                                        type="text"
+                                                        value={cidade}
+                                                        onChange={e => setCidade(e.target.value)}
+                                                    />
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={1}>
+                                                <Form.Group controlId="uf">
+                                                    <Form.Label>UF</Form.Label>
+                                                    <Form.Control
+                                                        className='uf'
+                                                        required
+                                                        maxLength="2"
+                                                        type="text"
+                                                        value={uf}
+                                                        onChange={e => setUf(e.target.value)}
+                                                    />
+                                                </Form.Group>
+                                            </Col>
+                                            <Col>
+                                                <Form.Group controlId="email">
+                                                    <Form.Label>E-mail</Form.Label>
+                                                    <Form.Control
+                                                        required
+                                                        type="email"
+                                                        value={email}
+                                                        onChange={e => setEmail(e.target.value)}
+                                                    />
+                                                </Form.Group>
+                                            </Col>
+                                            <Col>
+                                                <Form.Group controlId="telefone">
+                                                    <Form.Label>Telefone</Form.Label>
+                                                    <MaskedInput
+                                                        id='telefone'
+                                                        className='form-control'
+                                                        required
+                                                        guide={false}
+                                                        mask={mascaraTelefone}
+                                                        onChange={e => setTelefone(e.target.value)}
+                                                    />
+                                                </Form.Group>
+                                            </Col>
+                                        </Form.Row>
 
-                        <Button variant="secondary" className="button" type="submit">
-                            Cadastrar Cliente
-                        </Button>
-                    </Form>
+                                        <Button variant="secondary" className="button" type="submit">
+                                            Cadastrar Cliente
+                                        </Button>
+                                    </Form>
+                                </div>
+                            </Row>
+                        </div>
+                    </div>
                 </div>
-            </Row>
+            </div>
+
         </Container >
     );
 

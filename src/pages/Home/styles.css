@@ -20,6 +20,15 @@
     text-align: center;
 }
 
+.icones-menu{
+    display: inline;
+    margin-right: 15px;
+    margin-left: 0px;
+    width: 15px;
+    height: 15px;   
+    text-align: center;
+}
+
 .texto-card {
     display: block;
     margin-top: 15px;

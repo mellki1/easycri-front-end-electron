@@ -12,10 +12,12 @@ function createWindow () {
     }
   })
 
+  win.setMenu(null);
   // e carregar o index.html do aplicativo.
   win.loadURL(
     isDev ?  "http://localhost:3000" : `file://${path.join(__dirname, "../build/index.html")}`
   )
+
 }
 
 app.whenReady().then(createWindow)
