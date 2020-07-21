@@ -1,38 +1,21 @@
 import React from 'react';
 import './styles.css';
 import './../../photon/css/photon.min.css';
-import { BsFillPersonPlusFill, BsFilePlus, BsPencilSquare, BsHouseFill } from 'react-icons/bs';
+import Header from './../Header';
+import { BsFillPersonPlusFill, BsFilePlus, BsPencilSquare} from 'react-icons/bs';
 import { Container, Row, Col } from 'react-bootstrap';
+
 export default function Home() {
     return (
         <Container fluid >
-            
+
             <div class="window">
-               
+
                 <div class="window-content">
                     <div class="pane-group">
                         <div class="pane-sm sidebar">
-                            <nav class="nav-group">
-                                <h4 class="nav-group-title">Menu</h4>
-                                <span class="nav-group-item">
-                                    <BsHouseFill className='icones-menu'/>
-                                        Inicio
-                                </span>
-                                <span class="nav-group-item">
-                                    <BsFillPersonPlusFill className='icones-menu'/>
-                                        Cadastrar clientes
-                                </span>
-                                <span class="nav-group-item">
-                                    <BsFilePlus className='icones-menu'/>
-                                        Cadastrar requerimento
-                                </span>
-                                <span class="nav-group-item">
-                                    <BsPencilSquare className='icones-menu'/>
-                                        Gerar ato
-                                </span>
-                                
-                               
-                            </nav>
+
+                            <Header />
                         </div>
                         <div class="pane">
                             <Row>

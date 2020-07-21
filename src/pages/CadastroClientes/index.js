@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
-import { BsFillPersonPlusFill, BsFilePlus, BsPencilSquare, BsHouseFill } from 'react-icons/bs';
+
 import MaskedInput from 'react-text-mask';
 import { validateBr } from 'js-brasil';
 import api from './../../services/api';
 
 import './styles.css';
+import Header from '../Header';
 
 export default function CadastroCliente() {
     const [form, setForm] = useState();
@@ -30,8 +31,8 @@ export default function CadastroCliente() {
     const [telefone, setTelefone] = useState();
 
     //funcao para validar CPF
-    function ValidacaoCPF(cpfCli) {
-
+    function validacaoCPF(cpfCli) {
+        console.log(cpfCli);
         if (validateBr.cpf(cpfCli) === true) {
             return true;
         } else if (validateBr.cpf(cpfCli) === false) {
@@ -42,14 +43,14 @@ export default function CadastroCliente() {
     }
 
     //Verificando CPF enquanto e digitado
-    function VerificacaoCpf() {
-        const cpfCli = document.getElementById('cpf');
+    function verificacaoCpf() {
+        let cpfCli = document.getElementById('cpf');
 
         //Validando CPF e mudando CSS
-        if (ValidacaoCPF(cpf) === false) {
+        if (validacaoCPF(cpf) === false) {
             cpfCli.className = 'cpf-invalido';
 
-        } else if (ValidacaoCPF(cpf) === true) {
+        } else if (validacaoCPF(cpf) === true) {
             cpfCli.className = 'form-control';
         }
     }
@@ -68,9 +69,9 @@ export default function CadastroCliente() {
     //Verificando se o formulario foi preenchido correntamente
     async function handleSubmit(event) {
 
-        const form = event.currentTarget;
+        const formulario = event.currentTarget;
 
-        if (form.checkValidity() === false || ValidacaoCPF(cpf) === false) {
+        if (formulario.checkValidity() === false || validacaoCPF(cpf) === false) {
             event.preventDefault();
             event.stopPropagation();
 
@@ -101,19 +102,23 @@ export default function CadastroCliente() {
             }
 
         }
-        try {
+        console.log(data);
+        //try {
             const response = await api.post('clientes', data);
-            console.log(response.data);
-            alert(`Cliente ${response.data.nomeCliPf} adicionado com sucesso`);
+            alert(`${response}`);
+            setValidated(true);
+            /*console.log(response.data);
+            
+            alert(`Cliente ${response.data.clientePf.nome} adicionado com sucesso`);
 
             setValidated(true);
         } catch (error) {
             alert('Erro no cadastro, tente novamente');
-        }
+        }*/
 
 
     }
-    
+
     /* Opções de acordo com o sexo */
     async function Formulario(sexoCli) {
 
@@ -204,29 +209,11 @@ export default function CadastroCliente() {
 
         <Container fluid >
             <div class="window">
+
                 <div class="window-content">
                     <div class="pane-group">
                         <div class="pane-sm sidebar">
-                            { /* Menu */}
-                            <nav class="nav-group">
-                                <h4 class="nav-group-title">Menu</h4>
-                                <span class="nav-group-item">
-                                    <BsHouseFill className='icones-menu' />
-                                       Inicio
-                               </span>
-                                <span class="nav-group-item">
-                                    <BsFillPersonPlusFill className='icones-menu' />
-                                       Cadastrar clientes
-                               </span>
-                                <span class="nav-group-item">
-                                    <BsFilePlus className='icones-menu' />
-                                       Cadastrar requerimento
-                               </span>
-                                <span class="nav-group-item">
-                                    <BsPencilSquare className='icones-menu' />
-                                       Gerar ato
-                               </span>
-                            </nav>
+                            <Header />
                         </div>
                         <div class="pane">
                             { /* Formulario */}
@@ -237,41 +224,41 @@ export default function CadastroCliente() {
                                             <Col>
                                                 <Form.Group>
                                                     <Form.Label>Sexo</Form.Label>
-                                                        <div>
-                                                            <label>
-                                                                <input
-                                                                    type="radio"
-                                                                    name='sexo'
-                                                                    value='sexo_feminino'
-                                                                    onChange={
-                                                                        e => {
-                                                                            setSexo(e.target.value);
-                                                                            setEstadoCivil('solteira');
-                                                                            setNacionalidade('brasileira');
-                                                                            Formulario(e.target.value);
-                                                                        }
+                                                    <div>
+                                                        <label>
+                                                            <input
+                                                                type="radio"
+                                                                name='sexo'
+                                                                value='sexo_feminino'
+                                                                onChange={
+                                                                    e => {
+                                                                        setSexo(e.target.value);
+                                                                        setEstadoCivil('solteira');
+                                                                        setNacionalidade('brasileira');
+                                                                        Formulario(e.target.value);
                                                                     }
-                                                                />
+                                                                }
+                                                            />
                                                                 Feminino
                                                             </label>
 
-                                                            <label className='espaco-radio'>
-                                                                <input
-                                                                    type="radio"
-                                                                    name='sexo'
-                                                                    value='sexo_masculino'
-                                                                    onChange={
-                                                                        e => {
-                                                                            setSexo(e.target.value);
-                                                                            setEstadoCivil('solteiro');
-                                                                            setNacionalidade('brasileiro');
-                                                                            Formulario(e.target.value);
-                                                                        }
+                                                        <label className='espaco-radio'>
+                                                            <input
+                                                                type="radio"
+                                                                name='sexo'
+                                                                value='sexo_masculino'
+                                                                onChange={
+                                                                    e => {
+                                                                        setSexo(e.target.value);
+                                                                        setEstadoCivil('solteiro');
+                                                                        setNacionalidade('brasileiro');
+                                                                        Formulario(e.target.value);
                                                                     }
-                                                                />
+                                                                }
+                                                            />
                                                                 Masculino
                                                             </label>
-                                                        </div>
+                                                    </div>
                                                 </Form.Group>
                                             </Col>
 
@@ -340,7 +327,10 @@ export default function CadastroCliente() {
                                                         mask={[/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/,]}
                                                         value={cpf}
                                                         onChange={e => setCpf(e.target.value)}
-                                                        onKeyUp={VerificacaoCpf}
+                                                        onKeyUp={(e)=>{
+                                                            setCpf(e.target.value);
+                                                            verificacaoCpf();
+                                                        }}
                                                     />
 
                                                 </Form.Group>
