@@ -102,20 +102,18 @@ export default function CadastroCliente() {
             }
 
         }
-        console.log(data);
-        //try {
-            const response = await api.post('clientes', data);
-            alert(`${response}`);
-            setValidated(true);
-            /*console.log(response.data);
-            
-            alert(`Cliente ${response.data.clientePf.nome} adicionado com sucesso`);
+        const response = await api.post('clientes', data)
+            .then(
+                (res) => {
+                    alert(`Cliente ${response.data.clientePf.nome} adicionado com sucesso`)
+                    setValidated(true)
 
-            setValidated(true);
-        } catch (error) {
-            alert('Erro no cadastro, tente novamente');
-        }*/
+                },
+                (error) => {
+                    alert(`${error}`)
+                }
 
+            );
 
     }
 
@@ -327,7 +325,7 @@ export default function CadastroCliente() {
                                                         mask={[/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/,]}
                                                         value={cpf}
                                                         onChange={e => setCpf(e.target.value)}
-                                                        onKeyUp={(e)=>{
+                                                        onKeyUp={(e) => {
                                                             setCpf(e.target.value);
                                                             verificacaoCpf();
                                                         }}
