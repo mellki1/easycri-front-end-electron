@@ -66,18 +66,19 @@ export default function CadastroCliente() {
         }
     }
 
+   
+
     //Verificando se o formulario foi preenchido correntamente
     async function handleSubmit(event) {
 
         const formulario = event.currentTarget;
 
         if (formulario.checkValidity() === false || validacaoCPF(cpf) === false) {
-            event.preventDefault();
+            //event.preventDefault();
             event.stopPropagation();
 
         }
         const data = {
-
             tipo: "PESSOA_FISICA",
             endereco: {
                 logradouro,
@@ -100,21 +101,21 @@ export default function CadastroCliente() {
                 nomePai,
                 nomeMae
             }
-
         }
-        const response = await api.post('clientes', data)
-            .then(
-                (res) => {
-                    alert(`Cliente ${response.data.clientePf.nome} adicionado com sucesso`)
-                    setValidated(true)
 
-                },
-                (error) => {
-                    alert(`${error}`)
-                }
-
-            );
-
+        // alert(`Cliente ${response.data.clientePf.nome} adicionado com sucesso`)
+       
+     
+            const response = await api.post('clientes', data).then(()=>{
+                alert(`Cliente ${response.data.clientePf.nome} adicionado com sucesso`);
+                setValidated(true);
+            })
+            .catch((e)=>{
+                alert(`${e.response.data.error}`);
+            })
+            
+    
+        
     }
 
     /* Opções de acordo com o sexo */
