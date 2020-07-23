@@ -74,10 +74,11 @@ export default function CadastroCliente() {
         const formulario = event.currentTarget;
 
         if (formulario.checkValidity() === false || validacaoCPF(cpf) === false) {
-            //event.preventDefault();
+            alert(`Cadastro não preenchido corretamente`);
+            event.preventDefault();
             event.stopPropagation();
-
-        }
+            
+        } 
         const data = {
             tipo: "PESSOA_FISICA",
             endereco: {
@@ -103,16 +104,15 @@ export default function CadastroCliente() {
             }
         }
 
-        // alert(`Cliente ${response.data.clientePf.nome} adicionado com sucesso`)
-       
-     
-            const response = await api.post('clientes', data).then(()=>{
-                alert(`Cliente ${response.data.clientePf.nome} adicionado com sucesso`);
+        const response = await api.post('clientes', data).then(()=>{
+            alert(`Cliente ${response.data.clientePf.nome} adicionado com sucesso`);
+            if(response.status === 200){
                 setValidated(true);
-            })
-            .catch((e)=>{
-                alert(`${e.response.data.error}`);
-            })
+            }
+        })
+        .catch((e)=>{
+            alert(`${e.response.data.error}`);
+        });
             
     
         
