@@ -29,45 +29,6 @@ export default function CadastroCliente() {
     const [uf, setUf] = useState();
     const [email, setEmail] = useState();
     const [telefone, setTelefone] = useState();
-
-    //funcao para validar CPF
-    function validacaoCPF(cpfCli) {
-        console.log(cpfCli);
-        if (validateBr.cpf(cpfCli) === true) {
-            return true;
-        } else if (validateBr.cpf(cpfCli) === false) {
-
-            return false;
-        }
-
-    }
-
-    //Verificando CPF enquanto e digitado
-    function verificacaoCpf() {
-        let cpfCli = document.getElementById('cpf');
-
-        //Validando CPF e mudando CSS
-        if (validacaoCPF(cpf) === false) {
-            cpfCli.className = 'cpf-invalido';
-
-        } else if (validacaoCPF(cpf) === true) {
-            cpfCli.className = 'form-control';
-        }
-    }
-
-    //Mascara para telefone
-    const mascaraTelefone = (e) => {
-        const telefoneCli = document.getElementById('telefone').value;
-        let tamanhoTelefone = telefoneCli.length;
-        if (tamanhoTelefone < 15) {
-            return (['(', /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]);
-        } else {
-            return (['(', /\d/, /\d/, ')', ' ', /\d/, ' ', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]);
-        }
-    }
-
-   
-
     //Verificando se o formulario foi preenchido correntamente
     async function handleSubmit(event) {
 
@@ -103,19 +64,53 @@ export default function CadastroCliente() {
                 nomeMae
             }
         }
+        cadastrandoCliente(data);
 
-        const response = await api.post('clientes', data).then(()=>{
-            alert(`Cliente ${response.data.clientePf.nome} adicionado com sucesso`);
-            if(response.status === 200){
-                setValidated(true);
-            }
-        })
-        .catch((e)=>{
+    }
+
+    async function cadastrandoCliente(data){
+        try {
+            await api.post('clientes', data);
+            alert(`Cliente ${data.clientePf.nome} adicionado com sucesso`);            
+            setValidated(true);
+        } catch (e) {
             alert(`${e.response.data.error}`);
-        });
-            
-    
-        
+        }
+    }
+    //funcao para validar CPF
+    function validacaoCPF(cpfCli) {
+        console.log(cpfCli);
+        if (validateBr.cpf(cpfCli) === true) {
+            return true;
+        } else if (validateBr.cpf(cpfCli) === false) {
+
+            return false;
+        }
+
+    }
+
+    //Verificando CPF enquanto e digitado
+    function verificacaoCpf() {
+        let cpfCli = document.getElementById('cpf');
+
+        //Validando CPF e mudando CSS
+        if (validacaoCPF(cpf) === false) {
+            cpfCli.className = 'cpf-invalido';
+
+        } else if (validacaoCPF(cpf) === true) {
+            cpfCli.className = 'form-control';
+        }
+    }
+
+    //Mascara para telefone
+    function mascaraTelefone() {
+        const telefoneCli = document.getElementById('telefone').value;
+        let tamanhoTelefone = telefoneCli.length;
+        if (tamanhoTelefone < 15) {
+            return (['(', /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]);
+        } else {
+            return (['(', /\d/, /\d/, ')', ' ', /\d/, ' ', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]);
+        }
     }
 
     /* Opções de acordo com o sexo */
@@ -224,7 +219,7 @@ export default function CadastroCliente() {
                                                 <Form.Group>
                                                     <Form.Label>Sexo</Form.Label>
                                                     <div>
-                                                        <label>
+                                                        <label className='radio-box'>
                                                             <input
                                                                 type="radio"
                                                                 name='sexo'
@@ -241,7 +236,7 @@ export default function CadastroCliente() {
                                                                 Feminino
                                                             </label>
 
-                                                        <label className='espaco-radio'>
+                                                        <label className='espaco-radio radio-box'>
                                                             <input
                                                                 type="radio"
                                                                 name='sexo'
