@@ -16,3 +16,11 @@
     font-weight: 500;
     font-size: 22px;
 }
+
+.nav-group-item:hover{
+    text-decoration:none;
+}
+
+.av-group-item a:focus{
+    outline: none;
+ }

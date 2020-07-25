@@ -6,7 +6,7 @@ import { validateBr } from 'js-brasil';
 import api from './../../services/api';
 
 import './styles.css';
-import Header from '../Header';
+import Menu from './../Menu/index';
 
 export default function CadastroCliente() {
     const [form, setForm] = useState();
@@ -120,7 +120,7 @@ export default function CadastroCliente() {
         if (sexoCli === 'sexo_masculino') {
 
             setForm(
-                <Form.Row >
+                <Row className='inline'>
                     <Col xs={4}>
                         <Form.Group controlId="nacionalidade">
                             <Form.Label>Nacionalidade</Form.Label>
@@ -153,13 +153,13 @@ export default function CadastroCliente() {
                             </Form.Control>
                         </Form.Group>
                     </Col>
-                </Form.Row >
+                </Row >
 
             );
         } else if (sexoCli === 'sexo_feminino') {
 
             setForm(
-                <Form.Row>
+                <Row className='inline'>
                     <Col xs={4}>
                         <Form.Group controlId="nacionalidade">
                             <Form.Label>Nacionalidade</Form.Label>
@@ -192,7 +192,7 @@ export default function CadastroCliente() {
                             </Form.Control>
                         </Form.Group>
                     </Col>
-                </Form.Row>
+                </Row>
 
             );
 
@@ -207,7 +207,7 @@ export default function CadastroCliente() {
                 <div class="window-content">
                     <div class="pane-group">
                         <div class="pane-sm sidebar">
-                            <Header />
+                            <Menu />
                         </div>
                         <div class="pane">
                             { /* Formulario */}
@@ -269,7 +269,7 @@ export default function CadastroCliente() {
                                                     />
                                                 </Form.Group>
                                             </Col>
-                                            <Col className='space'>
+                                            <Col>
                                                 {form}
                                             </Col>
                                         </Form.Row>
@@ -441,7 +441,7 @@ export default function CadastroCliente() {
                                             </Col>
                                         </Form.Row>
 
-                                        <Button variant="secondary" className="button" type="submit">
+                                        <Button variant="secondary" className="btn btn-large btn-primary" type="submit">
                                             Cadastrar Cliente
                                         </Button>
                                     </Form>

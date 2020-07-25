@@ -1,8 +1,8 @@
 import React from 'react';
 import './styles.css';
 import './../../photon/css/photon.min.css';
-import Header from './../Header';
-import { BsFillPersonPlusFill, BsFilePlus, BsPencilSquare} from 'react-icons/bs';
+import Menu from './../Menu';
+import { BsFillPersonPlusFill, BsFillPersonLinesFill, BsFilePlus, BsPencilSquare} from 'react-icons/bs';
 import { Container, Row, Col } from 'react-bootstrap';
 
 export default function Home() {
@@ -15,7 +15,7 @@ export default function Home() {
                     <div class="pane-group">
                         <div class="pane-sm sidebar">
 
-                            <Header />
+                            <Menu />
                         </div>
                         <div class="pane">
                             <Row>
@@ -54,6 +54,21 @@ export default function Home() {
                                         <div className='buttons'>
                                             <a type='button' href='/' className=''>
                                                 Gerar Ato
+                                            </a>
+                                        </div>
+                                    </div>
+                                </Col> 
+                            </Row>
+                            <Row className='adicionar-espaco-cards'>
+                                <Col sm={4}>
+                                    <div className='cards espaco-cards'>
+                                        <BsFillPersonLinesFill className='icones' />
+                                        <p className='texto-card'>
+                                            Listar clientes para fazer alteração de cadastro
+                                        </p>
+                                        <div className='buttons'>
+                                            <a type='button' href='/clientes_list' className=''>
+                                                Listar clientes
                                             </a>
                                         </div>
                                     </div>

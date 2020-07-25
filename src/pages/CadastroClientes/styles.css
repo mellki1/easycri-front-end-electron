@@ -1,32 +1,7 @@
-.cadastro-container {
-    width: 100%;
-    max-width: 1120px;
-    height: 80vh;
-    margin: 50px auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 
-.cadastro-container  .content {
-    width: 100%;
-    padding: 96px;
-    background: #f0f0f5;
-    box-shadow: 0 0 100px #0000001a;
-    border-radius: 8px;
-    display: grid;
-    align-items: center;
-}
 
-.space{
-    margin-left: 15px;
-}
-
-.button {
-    background-color: #CED8DA;
-    border-radius: 30px;
-    color: #000000;
-    font-weight: 500;
+.inline{
+   margin-top: -6px;
 }
 
 .cpf-invalido {
@@ -49,4 +24,9 @@
 }
 .uf {
     text-transform: uppercase
+}
+
+.row{
+    margin-right: auto;
+    margin-left: auto;
 }

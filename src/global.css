@@ -14,3 +14,24 @@ input, button, textarea {
 button {
     cursor: pointer;
 }
+
+.cadastro-container {
+    width: 100%;
+    max-width: 1120px;
+    height: 80vh;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cadastro-container  .content {
+    width: 85%;
+    padding: 96px;
+    background: rgba(183, 194, 209, 0.514);
+    box-shadow: 0 0 100px #0000001a;
+    border-radius: 8px;
+    display: grid;
+    align-items: center;
+}
+
